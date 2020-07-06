@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function multple() {
+                var num1=document.getElementById('num').value;
+                for(var i=1;i<=12;i++){
+                    
+                    document.getElementById('result').innerHTML+=num1+'*'+i+'='+num1*i+'<br>';
+                }
+                
+            }
+            function ClearData() {
+                document.getElementById('num').value="";
+                document.getElementById('result').innerHTML="";
+                
+            }
+        </script>
+
+    </head>
+    <body>
+        Enter number: <input type="text" id="num"><br>
+        <button type="button" onclick="multple()">submit</button>
+        <button onclick="ClearData()">Reset</button><br>
+        <lable id="result"></lable>
+    </body>
+</html>
