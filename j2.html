@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <script>
+            function findOddEven(){
+              
+                var num = document.getElementById('num').value;
+ 
+                
+                if ( num % 2 == 0) {
+                    document.getElementById('lblResult').innerHTML = num +'<br>'+ ' is an Even number';
+                }else{
+                    document.getElementById('lblResult').innerHTML = num +'<br>' +'is an Odd number';
+                }
+            }
+            function clearData(){
+                var result=confirm("Are you sure want to clear?");
+                if(result==true){
+                    document.getElementById('num').value="";
+                 
+                    document.getElementById('lblResult').innerHTML="";
+                } }       
+        </script>
+    </head>
+    <body>
+        <h2>JavaScript to find Odd or Even number!</h2>
+        
+            <label> Enter a number:</label>
+          
+            <input type="text" id="num"/><br>
+            
+           <button  onclick="findOddEven ()">check</button>
+           <button onclick="clearData()">Reset</button>
+           <h3 id="lblResult"></h3>
+            
+    </body>
+</html>
