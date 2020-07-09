@@ -1,0 +1,168 @@
+<!Doctype html>
+<html>
+    <head>
+
+       
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            body{
+                background-color: whitesmoke;
+            }
+           .row{
+
+           background-color: cyan;
+            width:500px;
+            height: 120px;
+            padding:20px;
+            margin:30px;
+            border: 1px solid blue;
+}
+.inputext{
+    width: 90%;
+    height: 15%;
+}
+
+.row1{
+
+background-color: cyan;
+ width:500px;
+ height: 200px;
+ padding:20px;
+ margin-top:-500px;
+ margin-left: 700px;
+ border: 1px solid blue;
+ float: left;
+}
+.row2{
+
+background-color: cyan;
+ width:500px;
+ height: 200px;
+ padding:20px;
+ margin-top: -250px;
+ margin-left: 700px;
+ border: 1px solid blue;
+ float: left;
+}
+
+.icon1{
+    display: inline-block;
+               
+     padding-left: 60px;       
+             
+            }        
+            .Table{
+                text-align: center;
+                position: relative;
+                overflow: hidden;
+                width: 70%;
+                border: 1px;
+            }    
+
+
+                    
+            </style>
+            <script>
+                $(document).ready(function (){
+                    var totalbudget=0;
+                    $("#calculate").click(function () {
+                   var budget1 =$("#budget").val();
+
+                   totalbudget+=parseInt(budget1);
+                   $("#totalAmount").text(totalbudget);
+                   $("#balance").text(totalbudget);
+                    });
+                    
+                
+
+var expreBudget=0;
+    $("#calculate1").click(function () {
+        var expr1=$("#expe2").val();
+        expreBudget+=parseInt(expr1);
+        $("#exp1").text(expreBudget);
+    
+
+    var balance1=parseInt(totalbudget)-parseInt(expreBudget);
+    $("#balance").text(balance1);
+
+////Name
+    var expe11=$("#expe1").val();
+    
+        $("#expp1").text(expe11);
+////Value
+$("#expp2").text(expreBudget);
+ ////Table   
+    $("#list").append(
+                        "<tr>"
+                            +"<td>"+expe11+"</td>"
+                            +"<td>"+expreBudget+"</td>"+
+                            "<td><button type='button' id='editBtn'><i class='fas fa-edit' id='edit'></i></button><button type='button' id='deleteBtn'><i class='fas fa-trash' id='delete'></i></button></td></tr>"
+                    );
+                    });
+    
+});
+
+
+
+
+
+
+
+            </script>
+
+
+    </head>
+    <body>
+        <div class="row">
+            <h2>Please Enter Your Budget</h2>
+            <input class="inputext" type="text" id="budget" ><br>
+            <button name="calculate" id="calculate">Calculate</button>
+        </div>
+        <div class="row" style="height: 100%;">
+            <h2>Please Enter Your Expense</h2>
+            <input class="inputext" type="text" id="expe1" ><br>
+            <h2>Please Enter Your Expense Amount</h2>
+            <input class="inputext" type="text" id="expe2" ><br>
+            <button name="calculate" id="calculate1">Calculate</button>
+        </div>
+<div class="row1">
+    
+    <div style="text-align: center;padding-top: 0px;color: black; margin-left: -400px;">
+        <h3>BUDGET</h3>
+        <i class="fa fa-money" style="color: blue;font-size: 30px;"></i><br><br>
+        <i class="fa fa-dollar" style="color: blue;font-size: 20px;"></i>
+        <lable id="totalAmount">$0</lable>
+    </div>
+    <div style="text-align: center;color: black;margin-top: -155px; margin-left: -100px;">
+        <h3>EXPENSES</h3>
+        <i class="fa fa-credit-card" style="color: blue;font-size: 30px;"></i><br><br>
+        <i class="fa fa-dollar" style="color: blue;font-size: 20px;"></i>
+        <label id="exp1" style="color: blue;">$0</label>
+    </div>  
+    <div style="text-align: center;color: black;margin-top: -155px; margin-left: 180px;">
+        <h3>BALANCE</h3>
+        <i class="fa fa-dollar" style="color: blue;font-size: 30px;"></i><br><br>
+        <i class="fa fa-dollar" style="color: blue;font-size: 20px;"></i>
+        <label id="balance">$0</label>
+    </div>  
+    </div>
+    <div class="row2">
+        <table  class="Table" id="list">
+            <tr>
+                <th> Expense Title<br>
+                    <lable id="expp1"></lable>
+                </th>
+               
+                <th>Expense Value<br>
+                    <lable id="expp2">
+                </th>
+                <th>   </th>
+            </tr> 
+                        
+        </table>
+
+    </div>
+    </body>
+</html>
