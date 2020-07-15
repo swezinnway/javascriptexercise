@@ -1,0 +1,236 @@
+mysql> use Football;
+Database changed
+mysql> create table Team(t_id varchar(100) primary key,tname varchar(100),foundeddate date);
+Query OK, 0 rows affected (0.63 sec)
+
+mysql> insert into Team('t1', 'Red Devils','2013-11-22');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''t1', 'Red Devils','2013-11-22')' at line 1
+mysql> INSERT INTO Team VALUES ('t1', 'Red Devils','2013-11-22');
+Query OK, 1 row affected (0.20 sec)
+
+mysql> INSERT INTO Team VALUES ('t2', 'Devils','2013-11-22');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> INSERT INTO Team VALUES ('t3', 'Avengers','2013-12-02');
+Query OK, 1 row affected (0.18 sec)
+
+mysql> INSERT INTO Team VALUES ('t4', 'Rebels','2012-10-30');
+Query OK, 1 row affected (0.22 sec)
+
+mysql> INSERT INTO Team VALUES ('t5','Preachers','2010-9-28');
+Query OK, 1 row affected (0.16 sec)
+
+mysql> INSERT INTO Team VALUES ('t6','Banana Slugs','2007-5-22');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> select * from Team;
++------+--------------+-------------+
+| t_id | tname        | foundeddate |
++------+--------------+-------------+
+| t1   | Red Devils   | 2013-11-22  |
+| t2   | Devils       | 2013-11-22  |
+| t3   | Avengers     | 2013-12-02  |
+| t4   | Rebels       | 2012-10-30  |
+| t5   | Preachers    | 2010-09-28  |
+| t6   | Banana Slugs | 2007-05-22  |
++------+--------------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> desc player;
+ERROR 1146 (42S02): Table 'football.player' doesn't exist
+mysql> desc Player;
+ERROR 1146 (42S02): Table 'football.player' doesn't exist
+mysql> create table Player(id varchar(100) primary key,
+    -> pname varchar(100),
+    -> jersyno int,
+    -> age int,
+    -> salary decimal,
+    -> height decimal,
+    -> t_id varchar(100),
+    -> foreign key(t_id) references Team(t_id)
+    -> );
+Query OK, 0 rows affected (1.62 sec)
+
+mysql> drop table Player;
+Query OK, 0 rows affected (0.73 sec)
+
+mysql> create table Player(p_id varchar(100) primary key,
+    -> pname varchar(100),
+    -> jersyno int,
+    -> age int,
+    -> salary decimal,
+    -> height decimal,
+    -> t_id varchar(100),
+    -> foreign key(t_id) references Team(t_id)
+    -> );
+Query OK, 0 rows affected (1.80 sec)
+
+mysql> desc player;
++---------+---------------+------+-----+---------+-------+
+| Field   | Type          | Null | Key | Default | Extra |
++---------+---------------+------+-----+---------+-------+
+| p_id    | varchar(100)  | NO   | PRI | NULL    |       |
+| pname   | varchar(100)  | YES  |     | NULL    |       |
+| jersyno | int           | YES  |     | NULL    |       |
+| age     | int           | YES  |     | NULL    |       |
+| salary  | decimal(10,0) | YES  |     | NULL    |       |
+| height  | decimal(10,0) | YES  |     | NULL    |       |
+| t_id    | varchar(100)  | YES  | MUL | NULL    |       |
++---------+---------------+------+-----+---------+-------+
+7 rows in set (0.12 sec)
+
+
+mysql> insert into player values('p1','Aung thu',11,22,1000000,6,'t1');
+Query OK, 1 row affected (0.23 sec)
+
+mysql> insert into player values('p2','Lionel Messi',7,25,2000000,6.5,'t2');
+Query OK, 1 row affected, 1 warning (0.23 sec)
+
+mysql> insert into player values('p3','Xavi',10,23,2060000,5.8,'t3');
+Query OK, 1 row affected, 1 warning (0.16 sec)
+
+mysql> insert into player values('p4','Oscar',12,22,2800000,6,'t4');
+Query OK, 1 row affected (0.17 sec)
+
+mysql> insert into player values('p5','Andres Iniesta',6,27,10800000,6.6,'t5');
+Query OK, 1 row affected, 1 warning (0.17 sec)
+
+mysql> select * from player;
++------+----------------+---------+------+----------+--------+------+
+| p_id | pname          | jersyno | age  | salary   | height | t_id |
++------+----------------+---------+------+----------+--------+------+
+| p1   | Aung thu       |      11 |   22 |  1000000 |      6 | t1   |
+| p2   | Lionel Messi   |       7 |   25 |  2000000 |      7 | t2   |
+| p3   | Xavi           |      10 |   23 |  2060000 |      6 | t3   |
+| p4   | Oscar          |      12 |   22 |  2800000 |      6 | t4   |
+| p5   | Andres Iniesta |       6 |   27 | 10800000 |      7 | t5   |
++------+----------------+---------+------+----------+--------+------+
+5 rows in set (0.00 sec)
+
+1.
+mysql> select * from player where t_id='t2';
++------+--------------+---------+------+---------+--------+------+
+| p_id | pname        | jersyno | age  | salary  | height | t_id |
++------+--------------+---------+------+---------+--------+------+
+| p2   | Lionel Messi |       7 |   25 | 2000000 |      7 | t2   |
++------+--------------+---------+------+---------+--------+------+
+1 row in set (0.00 sec)
+
+2.
+mysql> select * from player where salary>500000;
++------+----------------+---------+------+----------+--------+------+
+| p_id | pname          | jersyno | age  | salary   | height | t_id |
++------+----------------+---------+------+----------+--------+------+
+| p1   | Aung thu       |      11 |   22 |  1000000 |      6 | t1   |
+| p2   | Lionel Messi   |       7 |   25 |  2000000 |      7 | t2   |
+| p3   | Xavi           |      10 |   23 |  2060000 |      6 | t3   |
+| p4   | Oscar          |      12 |   22 |  2800000 |      6 | t4   |
+| p5   | Andres Iniesta |       6 |   27 | 10800000 |      7 | t5   |
++------+----------------+---------+------+----------+--------+------+
+5 rows in set (0.11 sec)
+
+ 3.
+SELECT team.* ,SUM(salary) from team,player where team.t_id=player.t_id AND team.t_id="t1";
++------+------------+-------------+-------------+
+| t_id | tname      | foundeddate | SUM(salary) |
++------+------------+-------------+-------------+
+| t1   | Red Devils | 2013-11-22  |     2000000 |
++------+------------+-------------+-------------+
+1 row in set (0.00 sec)
+
+4.
+mysql> select * from player where height>5;
++------+----------------+---------+------+----------+--------+------+
+| p_id | pname          | jersyno | age  | salary   | height | t_id |
++------+----------------+---------+------+----------+--------+------+
+| p1   | Aung thu       |      11 |   22 |  1000000 |      6 | t1   |
+| p2   | Lionel Messi   |       7 |   25 |  2000000 |      7 | t2   |
+| p3   | Xavi           |      10 |   23 |  2060000 |      6 | t3   |
+| p4   | Oscar          |      12 |   22 |  2800000 |      6 | t4   |
+| p5   | Andres Iniesta |       6 |   27 | 10800000 |      7 | t5   |
+| p6   | Aung thu       |      11 |   22 |  1000000 |      6 | t1   |
++------+----------------+---------+------+----------+--------+------+
+6 rows in set (0.00 sec)
+
+mysql> select * from player where height<5;
+Empty set (0.00 sec)
+
+5.
+mysql> select team.*, AVG(salary) from player,team where team.t_id=player.t_id AND team.t_id='t2';
++------+--------+-------------+--------------+
+| t_id | tname  | foundeddate | AVG(salary)  |
++------+--------+-------------+--------------+
+| t2   | Devils | 2013-11-22  | 2000000.0000 |
++------+--------+-------------+--------------+
+1 row in set (0.00 sec)
+
+
+6.
+mysql> SELECT pname , salary FROM Player WHERE salary IN (SELECT MAX(salary) FROM Player);
++----------------+----------+
+| pname          | salary   |
++----------------+----------+
+| Andres Iniesta | 10800000 |
++----------------+----------+
+1 row in set (0.14 sec)
+
+mysql> SELECT pname , salary FROM Player WHERE salary IN (SELECT MIN(salary) FROM Player);
++----------+---------+
+| pname    | salary  |
++----------+---------+
+| Aung thu | 1000000 |
+| Aung thu | 1000000 |
++----------+---------+
+2 rows in set (0.00 sec)
+
+7.
+mysql> select * from player where age<25 AND salary>20000;
++------+----------+---------+------+---------+--------+------+
+| p_id | pname    | jersyno | age  | salary  | height | t_id |
++------+----------+---------+------+---------+--------+------+
+| p1   | Aung thu |      11 |   22 | 1000000 |      6 | t1   |
+| p3   | Xavi     |      10 |   23 | 2060000 |      6 | t3   |
+| p4   | Oscar    |      12 |   22 | 2800000 |      6 | t4   |
+| p6   | Aung thu |      11 |   22 | 1000000 |      6 | t1   |
++------+----------+---------+------+---------+--------+------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
